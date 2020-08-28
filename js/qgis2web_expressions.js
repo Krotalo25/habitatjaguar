@@ -757,14 +757,14 @@ function fnc_project_color(values, context) {
 
 
 
-function exp_label_reasNaturalesProtegidasFederales_7_eval_expression(context) {
-    // CAT_MANEJO || ' - ' || NOMBRE || '\n' || format_number(SUPERFICIE, 2, NULL) || ' Ha.'
+function exp_label_AreaNaturalProtegida_7_eval_expression(context) {
+    // CAT_MANEJO || ' - ' || NOMBRE
 
     var feature = context.feature;
     
     if (feature.properties) {
-        return (((((feature.properties['CAT_MANEJO']  + ' - ') + feature.properties['NOMBRE'] ) + '\n') + fnc_format_number([feature.properties['SUPERFICIE'] ,2,null], context)) + ' Ha.');
+        return ((feature.properties['CAT_MANEJO']  + ' - ') + feature.properties['NOMBRE'] );
     } else {
-        return (((((feature['CAT_MANEJO']  + ' - ') + feature['NOMBRE'] ) + '\n') + fnc_format_number([feature['SUPERFICIE'] ,2,null], context)) + ' Ha.');
+        return ((feature['CAT_MANEJO']  + ' - ') + feature['NOMBRE'] );
     }
 }

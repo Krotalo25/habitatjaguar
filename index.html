@@ -8,10 +8,9 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
-        html, body, #map {
+		html, body, #map {
             width: 100%;
             height: 100%;
             padding: 0;
@@ -32,21 +31,19 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
         <script src="data/LimitesMunicipalesQuintanaRoo_6.js"></script>
-        <script src="data/reasNaturalesProtegidasFederales_7.js"></script>
-        <script src="data/HabitatdelJaguar_8.js"></script>
+        <script src="data/AreaNaturalProtegida_7.js"></script>
+        <script src="data/HabitatPotencialJaguar_8.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[17.916728657762313,-89.98278902972781],[21.055611379363327,-86.83340837260305]]);
+        }).fitBounds([[18.071190587597304,-89.32425047336996],[19.59656556029758,-87.74956014480757]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a> &middot;<a href="https://twitter.com/LuisMora01">Krotalo25</a> ');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
-      
-
-L.Control.Watermark = L.Control.extend({
+		
+		L.Control.Watermark = L.Control.extend({
     onAdd: function(map) {
         var img = L.DomUtil.create('img');
 
@@ -66,9 +63,8 @@ L.control.watermark = function(opts) {
 }
 
 L.control.watermark({ position: 'bottomright' }).addTo(map);
-
-			
-L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+		
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         var measureControl = new L.Control.Measure({
             position: 'topleft',
             primaryLengthUnit: 'meters',
@@ -141,10 +137,10 @@ L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         });
         layer_GoogleSatellite_4;
         map.addLayer(layer_GoogleSatellite_4);
-        map.createPane('pane_GoogleLabels_5');
-        map.getPane('pane_GoogleLabels_5').style.zIndex = 405;
-        var layer_GoogleLabels_5 = L.tileLayer('https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}', {
-            pane: 'pane_GoogleLabels_5',
+        map.createPane('pane_GoogleEtiquetas_5');
+        map.getPane('pane_GoogleEtiquetas_5').style.zIndex = 405;
+        var layer_GoogleEtiquetas_5 = L.tileLayer('https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleEtiquetas_5',
             opacity: 1.0,
             attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
             minZoom: 1,
@@ -152,20 +148,20 @@ L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
             minNativeZoom: 0,
             maxNativeZoom: 20
         });
-        layer_GoogleLabels_5;
-        map.addLayer(layer_GoogleLabels_5);
+        layer_GoogleEtiquetas_5;
+        map.addLayer(layer_GoogleEtiquetas_5);
         function pop_LimitesMunicipalesQuintanaRoo_6(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">fid</th>\
-                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">MUNICIPIO</th>\
                         <td>' + (feature.properties['MUNICIPIO'] !== null ? autolinker.link(feature.properties['MUNICIPIO'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>Hectáreas</strong><br />' + (feature.properties['Hectáreas'] !== null ? autolinker.link(feature.properties['Hectáreas'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Hectáreas</th>\
+                        <td>' + (feature.properties['Hectáreas'] !== null ? autolinker.link(feature.properties['Hectáreas'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Área_m2</th>\
@@ -179,8 +175,8 @@ L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
             return {
                 pane: 'pane_LimitesMunicipalesQuintanaRoo_6',
                 opacity: 1,
-                color: 'rgba(255,251,3,1.0)',
-                dashArray: '10,5',
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
                 weight: 1.0,
@@ -202,14 +198,15 @@ L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         });
         bounds_group.addLayer(layer_LimitesMunicipalesQuintanaRoo_6);
         map.addLayer(layer_LimitesMunicipalesQuintanaRoo_6);
-        function pop_reasNaturalesProtegidasFederales_7(feature, layer) {
+        function pop_AreaNaturalProtegida_7(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">ID_ANP</th>\
                         <td>' + (feature.properties['ID_ANP'] !== null ? autolinker.link(feature.properties['ID_ANP'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>NOMBRE</strong><br />' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">NOMBRE</th>\
+                        <td>' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">CAT_DECRET</th>\
@@ -263,11 +260,11 @@ L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_reasNaturalesProtegidasFederales_7_0() {
+        function style_AreaNaturalProtegida_7_0() {
             return {
-                pane: 'pane_reasNaturalesProtegidasFederales_7',
+                pane: 'pane_AreaNaturalProtegida_7',
                 opacity: 1,
-                color: 'rgba(255,255,255,1.0)',
+                color: 'rgba(0,255,0,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -276,21 +273,21 @@ L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
                 interactive: true,
             }
         }
-        map.createPane('pane_reasNaturalesProtegidasFederales_7');
-        map.getPane('pane_reasNaturalesProtegidasFederales_7').style.zIndex = 407;
-        map.getPane('pane_reasNaturalesProtegidasFederales_7').style['mix-blend-mode'] = 'normal';
-        var layer_reasNaturalesProtegidasFederales_7 = new L.geoJson(json_reasNaturalesProtegidasFederales_7, {
+        map.createPane('pane_AreaNaturalProtegida_7');
+        map.getPane('pane_AreaNaturalProtegida_7').style.zIndex = 407;
+        map.getPane('pane_AreaNaturalProtegida_7').style['mix-blend-mode'] = 'normal';
+        var layer_AreaNaturalProtegida_7 = new L.geoJson(json_AreaNaturalProtegida_7, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_reasNaturalesProtegidasFederales_7',
-            layerName: 'layer_reasNaturalesProtegidasFederales_7',
-            pane: 'pane_reasNaturalesProtegidasFederales_7',
-            onEachFeature: pop_reasNaturalesProtegidasFederales_7,
-            style: style_reasNaturalesProtegidasFederales_7_0,
+            dataVar: 'json_AreaNaturalProtegida_7',
+            layerName: 'layer_AreaNaturalProtegida_7',
+            pane: 'pane_AreaNaturalProtegida_7',
+            onEachFeature: pop_AreaNaturalProtegida_7,
+            style: style_AreaNaturalProtegida_7_0,
         });
-        bounds_group.addLayer(layer_reasNaturalesProtegidasFederales_7);
-        map.addLayer(layer_reasNaturalesProtegidasFederales_7);
-        function pop_HabitatdelJaguar_8(feature, layer) {
+        bounds_group.addLayer(layer_AreaNaturalProtegida_7);
+        map.addLayer(layer_AreaNaturalProtegida_7);
+        function pop_HabitatPotencialJaguar_8(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">AREA</th>\
@@ -313,34 +310,30 @@ L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
                         <td>' + (feature.properties['VALUE'] !== null ? autolinker.link(feature.properties['VALUE'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>CLASS_NAME</strong><br />' + (feature.properties['CLASS_NAME'] !== null ? autolinker.link(feature.properties['CLASS_NAME'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">CLASS_NAME</th>\
+                        <td>' + (feature.properties['CLASS_NAME'] !== null ? autolinker.link(feature.properties['CLASS_NAME'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_HabitatdelJaguar_8_0(feature) {
+        function style_HabitatPotencialJaguar_8_0(feature) {
             switch(String(feature.properties['CLASS_NAME'])) {
                 case 'Habitat inadecuado':
                     return {
-                pane: 'pane_HabitatdelJaguar_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
+                pane: 'pane_HabitatPotencialJaguar_8',
+                stroke: false, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(204,0,0,0.34901960784313724)',
+                fillColor: 'rgba(204,0,0,0.35)',
                 interactive: true,
             }
                     break;
                 case 'Habitat potencial':
                     return {
-                pane: 'pane_HabitatdelJaguar_8',
+                pane: 'pane_HabitatPotencialJaguar_8',
                 opacity: 1,
-                color: 'rgba(45,255,13,1.0)',
+                color: 'rgba(50,160,45,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -351,55 +344,45 @@ L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
                     break;
             }
         }
-        map.createPane('pane_HabitatdelJaguar_8');
-        map.getPane('pane_HabitatdelJaguar_8').style.zIndex = 408;
-        map.getPane('pane_HabitatdelJaguar_8').style['mix-blend-mode'] = 'normal';
-        var layer_HabitatdelJaguar_8 = new L.geoJson(json_HabitatdelJaguar_8, {
+        map.createPane('pane_HabitatPotencialJaguar_8');
+        map.getPane('pane_HabitatPotencialJaguar_8').style.zIndex = 408;
+        map.getPane('pane_HabitatPotencialJaguar_8').style['mix-blend-mode'] = 'normal';
+        var layer_HabitatPotencialJaguar_8 = new L.geoJson(json_HabitatPotencialJaguar_8, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_HabitatdelJaguar_8',
-            layerName: 'layer_HabitatdelJaguar_8',
-            pane: 'pane_HabitatdelJaguar_8',
-            onEachFeature: pop_HabitatdelJaguar_8,
-            style: style_HabitatdelJaguar_8_0,
+            dataVar: 'json_HabitatPotencialJaguar_8',
+            layerName: 'layer_HabitatPotencialJaguar_8',
+            pane: 'pane_HabitatPotencialJaguar_8',
+            onEachFeature: pop_HabitatPotencialJaguar_8,
+            style: style_HabitatPotencialJaguar_8_0,
         });
-        bounds_group.addLayer(layer_HabitatdelJaguar_8);
-        map.addLayer(layer_HabitatdelJaguar_8);
-        var osmGeocoder = new L.Control.Geocoder({
-            collapsed: true,
-            position: 'topleft',
-            text: 'Search',
-            title: 'Testing'
-        }).addTo(map);
-        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-        .className += ' fa fa-search';
-        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-        .title += 'Search for a place';
+        bounds_group.addLayer(layer_HabitatPotencialJaguar_8);
+        map.addLayer(layer_HabitatPotencialJaguar_8);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Habitat del Jaguar <br /><table><tr><td style="text-align: center;"><img src="legend/HabitatdelJaguar_8_Habitatinadecuado0.png" /></td><td>Habitat inadecuado</td></tr><tr><td style="text-align: center;"><img src="legend/HabitatdelJaguar_8_Habitatpotencial1.png" /></td><td>Habitat potencial</td></tr></table>': layer_HabitatdelJaguar_8,'<img src="legend/reasNaturalesProtegidasFederales_7.png" /> Áreas Naturales Protegidas Federales': layer_reasNaturalesProtegidasFederales_7,'<img src="legend/LimitesMunicipalesQuintanaRoo_6.png" /> Limites Municipales Quintana Roo': layer_LimitesMunicipalesQuintanaRoo_6,"Google Labels": layer_GoogleLabels_5,"Google Satellite": layer_GoogleSatellite_4,"RGB - SianKaan": layer_RGBSianKaan_3,"Falso Color - BalanKaax": layer_FalsoColorBalanKaax_2,"Falso Color - SianKaan": layer_FalsoColorSianKaan_1,"RGB - BalanKaax": layer_RGBBalanKaax_0,}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        L.control.layers(baseMaps,{'Habitat Potencial Jaguar <br /><table><tr><td style="text-align: center;"><img src="legend/HabitatPotencialJaguar_8_Habitatinadecuado0.png" /></td><td>Habitat inadecuado</td></tr><tr><td style="text-align: center;"><img src="legend/HabitatPotencialJaguar_8_Habitatpotencial1.png" /></td><td>Habitat potencial</td></tr></table>': layer_HabitatPotencialJaguar_8,'<img src="legend/AreaNaturalProtegida_7.png" /> Area Natural Protegida': layer_AreaNaturalProtegida_7,'<img src="legend/LimitesMunicipalesQuintanaRoo_6.png" /> Limites Municipales Quintana Roo': layer_LimitesMunicipalesQuintanaRoo_6,"Google Etiquetas": layer_GoogleEtiquetas_5,"Google Satellite": layer_GoogleSatellite_4,"RGB - SianKaan": layer_RGBSianKaan_3,"Falso Color - BalanKaax": layer_FalsoColorBalanKaax_2,"Falso Color - SianKaan": layer_FalsoColorSianKaan_1,"RGB - BalanKaax": layer_RGBBalanKaax_0,}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
         setBounds();
         var i = 0;
-        layer_reasNaturalesProtegidasFederales_7.eachLayer(function(layer) {
+        layer_AreaNaturalProtegida_7.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((exp_label_reasNaturalesProtegidasFederales_7_eval_expression(context) !== null?String('<div style="color: #fffb03; font-size: 13pt; font-weight: bold; font-family: \'Bahnschrift SemiBold\', sans-serif;">' + exp_label_reasNaturalesProtegidasFederales_7_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_reasNaturalesProtegidasFederales_7'});
+            layer.bindTooltip((exp_label_AreaNaturalProtegida_7_eval_expression(context) !== null?String('<div style="color: #fffb03; font-size: 13pt; font-weight: bold; font-family: \'Bahnschrift SemiBold\', sans-serif;">' + exp_label_AreaNaturalProtegida_7_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_AreaNaturalProtegida_7'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_reasNaturalesProtegidasFederales_7]);
+        resetLabels([layer_AreaNaturalProtegida_7]);
         map.on("zoomend", function(){
-            resetLabels([layer_reasNaturalesProtegidasFederales_7]);
+            resetLabels([layer_AreaNaturalProtegida_7]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_reasNaturalesProtegidasFederales_7]);
+            resetLabels([layer_AreaNaturalProtegida_7]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_reasNaturalesProtegidasFederales_7]);
+            resetLabels([layer_AreaNaturalProtegida_7]);
         });
         </script>
     </body>
