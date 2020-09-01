@@ -10,10 +10,10 @@
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <style>
         html, body, #map {
-            width: 100%;
-            height: 95%;
+            width: 98%;
+            height: 93%;
             padding: 0;
-            margin: 0;
+            margin: auto;
         }
         </style>
         <title>Habitat del Jaguar</title>
@@ -23,8 +23,8 @@
 		</style>
     </head>
     <body>
-         <a href="https://www.facebook.com/Jard%C3%ADn-Zool%C3%B3gico-Payo-Obispo-1514970898802421/"><img src="images/LOGO ZOO.png"; style= "float:left"; width="85px"></a> <p> Habitat del Jaguar (Panthera Onca) al Sur de la Península de Yucatán</p>
-		<div id="map">
+        <a href="https://www.facebook.com/Jard%C3%ADn-Zool%C3%B3gico-Payo-Obispo-1514970898802421/"><img src="images/LOGO ZOO.png"; style= "float:left"; width="85px"></a> <p> Habitat del Jaguar (Panthera Onca) al Sur de la Península de Yucatán</p>
+        <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
@@ -37,13 +37,14 @@
         <script src="js/labels.js"></script>
         <script src="data/AreaNaturalProtegida_2.js"></script>
         <script src="data/QuintanaRoo_limites_3.js"></script>
-        <script src="data/HabitatPotencialJaguar_4.js"></script>
+        <script src="data/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4.js"></script>
+        <script src="data/HabitatPotencialJaguar_5.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[18.467829444875047,-89.78255762262957],[19.223175553985566,-88.96734725312335]]);
+        }).fitBounds([[18.919510176951952,-87.92374334657251],[19.277269166296286,-87.53763049793281]]);
         var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a> &middot;<a href="https://twitter.com/LuisMora01">Krotalo25</a>');
+        map.attributionControl.setPrefix('<a href="https://twitter.com/LuisMora01">Krotalo25</a> &middot; <a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a> ');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         L.Control.Watermark = L.Control.extend({
 		onAdd: function(map) {
@@ -64,7 +65,7 @@
 		return new L.Control.Watermark(opts);
 		}
 
-L.control.watermark({ position: 'bottomright' }).addTo(map);
+		L.control.watermark({ position: 'bottomright' }).addTo(map);
 		L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
@@ -233,7 +234,222 @@ L.control.watermark({ position: 'bottomright' }).addTo(map);
         });
         bounds_group.addLayer(layer_QuintanaRoo_limites_3);
         map.addLayer(layer_QuintanaRoo_limites_3);
-        function pop_HabitatPotencialJaguar_4(feature, layer) {
+        function pop_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">valsamof16</th>\
+                        <td>' + (feature.properties['valsamof16'] !== null ? autolinker.link(feature.properties['valsamof16'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DesSAMOF16</th>\
+                        <td>' + (feature.properties['DesSAMOF16'] !== null ? autolinker.link(feature.properties['DesSAMOF16'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sup_has'] !== null ? autolinker.link(feature.properties['Sup_has'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_0(feature) {
+            switch(String(feature.properties['DesSAMOF16'])) {
+                case 'Agua (H2O, PRE y ACUI)':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(166,206,227,0.35)',
+                interactive: true,
+            }
+                    break;
+                case 'Manglar y Petén (VM y PT)':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,0.35)',
+                interactive: true,
+            }
+                    break;
+                case 'Pastizales Cultivado e Inducido (PC y PI)':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,251,3,0.35)',
+                interactive: true,
+            }
+                    break;
+                case 'Pastizales Naturales (PN, PY, PH, VW, VS y VSI)':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,213,3,0.35)',
+                interactive: true,
+            }
+                    break;
+                case 'Selva Baja Caducifolia Subcaducifolia (SBC, SBK, SBS,MST y VPI )':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(89,224,22,0.35)',
+                interactive: true,
+            }
+                    break;
+                case 'Selva Baja y Mediana Subperennifolia (SBQ, SBQP, SMQ, SG y VPN)':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(53,119,60,0.35)',
+                interactive: true,
+            }
+                    break;
+                case 'Selva Mediana Caducifolia y Subcaducifolia (SMC y SMS)':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,160,44,0.35)',
+                interactive: true,
+            }
+                    break;
+                case 'Suelo Desnudo (ADV y DV)':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(128,128,128,0.35)',
+                interactive: true,
+            }
+                    break;
+                case 'Tierras Agrícolas (T, R y H) Cultivos anuales':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,191,111,0.35)',
+                interactive: true,
+            }
+                    break;
+                case 'Tular (VT)':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(178,223,138,0.35)',
+                interactive: true,
+            }
+                    break;
+                case 'Urbano y Construido (ZU y AH)':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,154,153,0.35)',
+                interactive: true,
+            }
+                    break;
+                case 'Vegetación de Dunas Costeras (VU)':
+                    return {
+                pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.35)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,255,230,0.35)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4');
+        map.getPane('pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4').style.zIndex = 404;
+        map.getPane('pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4').style['mix-blend-mode'] = 'normal';
+        var layer_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4 = new L.geoJson(json_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+            layerName: 'layer_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+            pane: 'pane_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4',
+            onEachFeature: pop_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4,
+            style: style_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_0,
+        });
+        bounds_group.addLayer(layer_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4);
+        map.addLayer(layer_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4);
+        function pop_HabitatPotencialJaguar_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">AREA</th>\
@@ -263,28 +479,28 @@ L.control.watermark({ position: 'bottomright' }).addTo(map);
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_HabitatPotencialJaguar_4_0(feature) {
+        function style_HabitatPotencialJaguar_5_0(feature) {
             switch(String(feature.properties['CLASS_NAME'])) {
                 case 'Habitat inadecuado':
                     return {
-                pane: 'pane_HabitatPotencialJaguar_4',
+                pane: 'pane_HabitatPotencialJaguar_5',
                 opacity: 1,
-                color: 'rgba(204,0,0,0.35)',
+                color: 'rgba(128,14,16,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(204,0,0,0.35)',
+                fillColor: 'rgba(228,26,28,0.35)',
                 interactive: true,
             }
                     break;
                 case 'Habitat potencial':
                     return {
-                pane: 'pane_HabitatPotencialJaguar_4',
+                pane: 'pane_HabitatPotencialJaguar_5',
                 opacity: 1,
-                color: 'rgba(50,160,45,1.0)',
+                color: 'rgba(255,255,255,0.25)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -295,22 +511,22 @@ L.control.watermark({ position: 'bottomright' }).addTo(map);
                     break;
             }
         }
-        map.createPane('pane_HabitatPotencialJaguar_4');
-        map.getPane('pane_HabitatPotencialJaguar_4').style.zIndex = 404;
-        map.getPane('pane_HabitatPotencialJaguar_4').style['mix-blend-mode'] = 'normal';
-        var layer_HabitatPotencialJaguar_4 = new L.geoJson(json_HabitatPotencialJaguar_4, {
+        map.createPane('pane_HabitatPotencialJaguar_5');
+        map.getPane('pane_HabitatPotencialJaguar_5').style.zIndex = 405;
+        map.getPane('pane_HabitatPotencialJaguar_5').style['mix-blend-mode'] = 'normal';
+        var layer_HabitatPotencialJaguar_5 = new L.geoJson(json_HabitatPotencialJaguar_5, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_HabitatPotencialJaguar_4',
-            layerName: 'layer_HabitatPotencialJaguar_4',
-            pane: 'pane_HabitatPotencialJaguar_4',
-            onEachFeature: pop_HabitatPotencialJaguar_4,
-            style: style_HabitatPotencialJaguar_4_0,
+            dataVar: 'json_HabitatPotencialJaguar_5',
+            layerName: 'layer_HabitatPotencialJaguar_5',
+            pane: 'pane_HabitatPotencialJaguar_5',
+            onEachFeature: pop_HabitatPotencialJaguar_5,
+            style: style_HabitatPotencialJaguar_5_0,
         });
-        bounds_group.addLayer(layer_HabitatPotencialJaguar_4);
-        map.addLayer(layer_HabitatPotencialJaguar_4);
+        bounds_group.addLayer(layer_HabitatPotencialJaguar_5);
+        map.addLayer(layer_HabitatPotencialJaguar_5);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Habitat Potencial Jaguar<br /><table><tr><td style="text-align: center;"><img src="legend/HabitatPotencialJaguar_4_Habitatinadecuado0.png" /></td><td>Habitat inadecuado</td></tr><tr><td style="text-align: center;"><img src="legend/HabitatPotencialJaguar_4_Habitatpotencial1.png" /></td><td>Habitat potencial</td></tr></table>': layer_HabitatPotencialJaguar_4,'<img src="legend/QuintanaRoo_limites_3.png" /> QuintanaRoo_limites': layer_QuintanaRoo_limites_3,'<img src="legend/AreaNaturalProtegida_2.png" /> Area Natural Protegida': layer_AreaNaturalProtegida_2,"Google Etiquetas": layer_GoogleEtiquetas_1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        L.control.layers(baseMaps,{'Habitat Potencial Jaguar<br /><table><tr><td style="text-align: center;"><img src="legend/HabitatPotencialJaguar_5_Habitatinadecuado0.png" /></td><td>Habitat inadecuado</td></tr><tr><td style="text-align: center;"><img src="legend/HabitatPotencialJaguar_5_Habitatpotencial1.png" /></td><td>Habitat potencial</td></tr></table>': layer_HabitatPotencialJaguar_5,'Cober_Veg_SAMOF2016_SianKaan_Uaymil<br /><table><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_AguaH2OPREyACUI0.png" /></td><td>Agua (H2O, PRE y ACUI)</td></tr><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_ManglaryPeténVMyPT1.png" /></td><td>Manglar y Petén (VM y PT)</td></tr><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_PastizalesCultivadoeInducidoPCyPI2.png" /></td><td>Pastizales Cultivado e Inducido (PC y PI)</td></tr><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_PastizalesNaturalesPNPYPHVWVSyVSI3.png" /></td><td>Pastizales Naturales (PN, PY, PH, VW, VS y VSI)</td></tr><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_SelvaBajaCaducifoliaSubcaducifoliaSBCSBKSBSMSTyVPI4.png" /></td><td>Selva Baja Caducifolia Subcaducifolia (SBC, SBK, SBS,MST y VPI )</td></tr><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_SelvaBajayMedianaSubperennifoliaSBQSBQPSMQSGyVPN5.png" /></td><td>Selva Baja y Mediana Subperennifolia (SBQ, SBQP, SMQ, SG y VPN)</td></tr><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_SelvaMedianaCaducifoliaySubcaducifoliaSMCySMS6.png" /></td><td>Selva Mediana Caducifolia y Subcaducifolia (SMC y SMS)</td></tr><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_SueloDesnudoADVyDV7.png" /></td><td>Suelo Desnudo (ADV y DV)</td></tr><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_TierrasAgrícolasTRyHCultivosanuales8.png" /></td><td>Tierras Agrícolas (T, R y H) Cultivos anuales</td></tr><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_TularVT9.png" /></td><td>Tular (VT)</td></tr><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_UrbanoyConstruidoZUyAH10.png" /></td><td>Urbano y Construido (ZU y AH)</td></tr><tr><td style="text-align: center;"><img src="legend/Cober_Veg_SAMOF2016_SianKaan_Uaymil_4_VegetacióndeDunasCosterasVU11.png" /></td><td>Vegetación de Dunas Costeras (VU)</td></tr></table>': layer_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4,'<img src="legend/QuintanaRoo_limites_3.png" /> QuintanaRoo_limites': layer_QuintanaRoo_limites_3,'<img src="legend/AreaNaturalProtegida_2.png" /> Area Natural Protegida': layer_AreaNaturalProtegida_2,"Google Etiquetas": layer_GoogleEtiquetas_1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
         setBounds();
         var i = 0;
         layer_AreaNaturalProtegida_2.eachLayer(function(layer) {
@@ -325,16 +541,31 @@ L.control.watermark({ position: 'bottomright' }).addTo(map);
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_AreaNaturalProtegida_2]);
+        var i = 0;
+        layer_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['DesSAMOF16'] !== null?String('<div style="color: #ffffff; font-size: 8pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['DesSAMOF16']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_AreaNaturalProtegida_2,layer_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4]);
         map.on("zoomend", function(){
-            resetLabels([layer_AreaNaturalProtegida_2]);
+            resetLabels([layer_AreaNaturalProtegida_2,layer_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_AreaNaturalProtegida_2]);
+            resetLabels([layer_AreaNaturalProtegida_2,layer_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_AreaNaturalProtegida_2]);
+            resetLabels([layer_AreaNaturalProtegida_2,layer_Cober_Veg_SAMOF2016_SianKaan_Uaymil_4]);
         });
         </script>
+	 <p>Mapa para determinar la zona óptima para el habitat del Jaguar (Panthera Onca) en la costa sur del estado de Quintana Roo<br>
+	 <p style="font-family:courier;">Referencias: <a href="http://www.conabio.gob.mx/institucion/proyectos/resultados/BJ006_Cartografia.pdf">Colchero,2005</a> <a href="https://www.gob.mx/conafor">Sistema Satelital de Monitoreo Forestal, 2020</a> <a href="https://www.gob.mx/conanp/documentos/region-peninsula-de-yucatan-y-caribe-mexicano?state=published">CONANP Áreas Naturales Protegidas</a> </p>
     </body>
 </html>
